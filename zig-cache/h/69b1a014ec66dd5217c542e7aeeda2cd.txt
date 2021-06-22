@@ -1,1 +1,0 @@
-56944 562949954122742 1623997936000000000 d01f2b3a7fbdb7b6ee42d2cd6f6829ec C:\Users\InK\zig\lib\zig\libc\mingw\lib-common\ntdll.def.in
