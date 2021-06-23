@@ -16,9 +16,10 @@ pub fn build(b: *std.build.Builder) void {
     
     
     exe.linkLibC();
-    exe.linkSystemLibrary("gdi32");
     exe.linkSystemLibrary("opengl32");
+    exe.linkSystemLibrary("gdi32");
     
+    exe.linkSystemLibrary("gdi32");
     exe.addIncludeDir("dependencies/glfw-3.3.4/include/");
     exe.defineCMacro("_GLFW_WIN32", null);
     exe.defineCMacro("_UNICODE", null);
@@ -45,10 +46,20 @@ pub fn build(b: *std.build.Builder) void {
         },
         &[_][]const u8{
             "-std=c99",
+            "-I" ++ glfw_src_dir
         },
     );
     
-    
+    const glad_dir = "dependencies/glad/";
+    exe.addCSourceFiles(
+        &[_][]const u8{
+            glad_dir ++ "src/glad.c",
+        },
+        &[_][]const u8{
+            "-I" ++ glad_dir ++ "/include/",
+        },
+    );
+    exe.addIncludeDir(glad_dir ++ "/include/");
     
     exe.setTarget(target);
     exe.setBuildMode(mode);
